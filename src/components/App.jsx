@@ -1,9 +1,10 @@
 import React, { Fragment } from 'react';
 import { bodyDark, bodyLight } from '../global/styles';
+import Chat from './Chat';
 
 export default () => (
   <Fragment>
-
+    <Chat />
     <style jsx global>
       {`
         html, body, #app {
