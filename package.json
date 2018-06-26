@@ -1,0 +1,8 @@
+{
+  "name": "react-redux-sockets-chat",
+  "version": "1.0.0",
+  "description": "Basic chat app built with react/redux/websockets",
+  "main": "index.js",
+  "author": "samblacklock <samblacklock@me.com>",
+  "license": "MIT"
+}
