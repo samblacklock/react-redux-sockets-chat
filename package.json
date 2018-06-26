@@ -6,6 +6,7 @@
   "author": "samblacklock <samblacklock@me.com>",
   "license": "MIT",
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "express": "^4.16.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
