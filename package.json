@@ -15,7 +15,9 @@
     "socket.io-client": "^2.1.1"
   },
   "scripts": {
-    "watch:files": "webpack --mode development --watch"
+    "watch:files": "webpack --mode development --watch",
+    "watch:server": "nodemon server.js",
+    "start": "webpack --mode production && node server.js"
   },
   "devDependencies": {
     "babel-core": "^6.26.3",
