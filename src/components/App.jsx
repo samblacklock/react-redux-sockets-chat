@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { bodyDark, bodyLight } from '../global/styles';
-import Chat from './Chat';
+import Chat from '../containers/Chat';
 
 export default () => (
   <Fragment>

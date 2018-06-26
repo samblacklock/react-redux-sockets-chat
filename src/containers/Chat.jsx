@@ -6,7 +6,6 @@ import ChatComponent from '../components/Chat';
 
 class Chat extends Component {
   handleSendMessage = (message) => {
-    console.log('handling message in chat container')
     this.props.actions.sendMessage(message);
   }
 
@@ -15,15 +14,13 @@ class Chat extends Component {
       <ChatComponent 
         messages={this.props.messages}
         handleSendMessage={this.handleSendMessage}
-        user={this.props.user}
       />
     );
   }
 }
 
 const mapStateToProps = state => ({
-  messages: state.messages,
-  user: state.user 
+  messages: state.messages
 });
 
 const mapDispatchToProps = dispatch => ({

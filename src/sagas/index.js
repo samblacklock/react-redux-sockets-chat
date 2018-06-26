@@ -1,3 +1,3 @@
-export default function initSagas() {
+export default function* initSagas() {
   return true
 }
