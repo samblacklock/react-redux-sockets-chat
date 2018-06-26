@@ -11,7 +11,9 @@ class Chat extends Component {
           Cool Chat App
         </h1>
         <div className="chat-container">
-          <MessageBox />
+          <MessageBox 
+            handleSendMessage={this.props.handleSendMessage}
+          />
         </div>
     
         <style jsx>

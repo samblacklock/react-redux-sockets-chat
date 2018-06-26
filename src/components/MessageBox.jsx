@@ -8,6 +8,12 @@ class Input extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+
+    const { message } = this.state;
+    if (message) {
+      this.props.handleSendMessage(this.state.message);
+      this.setState({ message: '' });
+    }
   }
 
   render() {
