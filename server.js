@@ -4,6 +4,7 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
+const slashCommand = require('slash-command');
 
 server.listen(3000);
 
@@ -35,7 +36,23 @@ io.on('connection', (socket) => {
 
     // listen for new messages
     socket.on('message', (data) => {
-      io.emit('message', { from: { ...socket.user }, ...data });
+      const { slashcommand, body } = slashCommand(data.message);
+      console.log(slashcommand, body);
+
+      switch (slashcommand) {
+        case '/nick':
+          socket.user.nickname = body;
+          socket.broadcast.emit('new_user', { id: socket.id, nickname: body });
+          break;
+        case '/think':
+          // set grey text
+          break;
+        case '/oops':
+          // remove last message
+          break;
+        default:
+          io.emit('message', { from: { ...socket.user }, ...data });
+      }
     });
   }
 });

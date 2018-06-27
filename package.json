@@ -13,6 +13,7 @@
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "redux-saga": "^0.16.0",
+    "slash-command": "^0.0.52",
     "socket.io": "^2.1.1",
     "socket.io-client": "^2.1.1",
     "styled-jsx": "^2.2.7",

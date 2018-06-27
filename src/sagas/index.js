@@ -1,5 +1,6 @@
 import io from 'socket.io-client';
 import { call, put, fork, take, select, takeLatest } from 'redux-saga/effects';
+import slashCommand from 'slash-command';
 import { eventChannel } from 'redux-saga';
 import { UPDATE_USER, SEND_MESSAGE, MESSAGE_RECIEVED, USER_LOGGED_ON, UPDATE_PARTNER } from '../actions/types';
 
@@ -23,6 +24,9 @@ function subscribe(socket) {
   return eventChannel((emit) => {
     socket.on('message', message => emit({ type: 'message', message }));
     socket.on('new_user', user => emit({ type: 'new_user', ...user }));
+    socket.on('room_full', () => {
+      alert('Sorry, the room is already full');
+    });
     socket.on('error', console.error);
 
     return () => socket.close();
@@ -48,7 +52,21 @@ function* readMessage(socket) {
 function* sendMessage(socket) {
   while (true) {
     const { message } = yield take(SEND_MESSAGE);
-    console.log('in sendmessage saga');
+    const { slashcommand, body } = slashCommand(message);
+
+    switch (slashcommand) {
+      case '/nick':
+        yield put({ type: UPDATE_USER, nickname: body });
+      case '/think':
+        // set grey text
+        break;
+      case '/oops':
+        // remove last message
+        break;
+      default:
+        break;
+    }
+
     socket.emit('message', { message });
   }
 }
