@@ -51,14 +51,18 @@ function* readMessage(socket) {
 
 function* sendMessage(socket) {
   while (true) {
-    const { message } = yield take(SEND_MESSAGE);
+    let { message } = yield take(SEND_MESSAGE);
     const { slashcommand, body } = slashCommand(message);
+
+    let think = false;
 
     switch (slashcommand) {
       case '/nick':
-        yield put({ type: UPDATE_USER, nickname: body });
+        yield put({ type: UPDATE_USER, nickname: body })
+        break;
       case '/think':
-        // set grey text
+        think = true;
+        message = body;
         break;
       case '/oops':
         // remove last message
@@ -67,7 +71,7 @@ function* sendMessage(socket) {
         break;
     }
 
-    socket.emit('message', { message });
+    socket.emit('message', { message, think });
   }
 }
 

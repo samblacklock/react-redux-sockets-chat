@@ -3,7 +3,10 @@ import { boxShadow, bodyLight, bodyDark } from '../global/styles';
 
 export default ({ message, userId }) => (
   <Fragment>
-    <div className={`message ${message.from.id === userId ? 'user' : 'partner'}`}>
+    <div className={`message 
+      ${message.from.id === userId ? 'user' : 'partner'}
+      ${message.think && ' think'}
+    `}>
       {message.message}
     </div>
 
@@ -27,6 +30,10 @@ export default ({ message, userId }) => (
           background-color: ${bodyDark}
           border-bottom-left-radius: 0
           margin-right: auto
+        }
+
+        .think {
+          color: grey
         }
       `}
     </style>
