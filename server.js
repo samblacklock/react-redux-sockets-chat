@@ -35,7 +35,7 @@ io.on('connection', (socket) => {
 
     // listen for new messages
     socket.on('message', (data) => {
-      io.emit('message', { ...data });
+      io.emit('message', { from: { ...socket.user }, ...data });
     });
   }
 });

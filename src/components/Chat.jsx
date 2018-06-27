@@ -5,6 +5,10 @@ import Message from './Message';
 import { boxShadow, white } from '../global/styles';
 
 class Chat extends Component {
+  componentDidUpdate() {
+    this.messageContainer.scrollTop = this.messageContainer.scrollHeight;
+  }
+
   render() {
     return (
       <Fragment>
@@ -13,8 +17,8 @@ class Chat extends Component {
         </h1>
         <h2>Hey {this.props.user.nickname}, you are chatting with {this.props.partner.nickname || 'no one! ☹️'}</h2>
         <div className="chat-container">
-          <div className="message-container">
-            { this.props.messages.map((message, i) => <Message key={i} message={message} />) }
+          <div className="message-container" ref={ref => this.messageContainer = ref}>
+            { this.props.messages.map((message, i) => <Message key={i} message={message} userId={this.props.user.id} />) }
           </div>
           <MessageBox 
             handleSendMessage={this.props.handleSendMessage}
@@ -37,6 +41,15 @@ class Chat extends Component {
               max-width: 100rem 
               padding: 1rem
               width: 80%
+
+              &:after {
+                background: linear-gradient(to bottom, white 0%, transparent 100%)
+                content: ''
+                height: 60%
+                position: absolute
+                top: 0
+                width: 100%
+              }
             }
 
             .message-container {
