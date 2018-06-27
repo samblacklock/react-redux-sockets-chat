@@ -1,9 +1,15 @@
-import { UPDATE_USER } from './types';
+import { UPDATE_USER, USER_LOGGED_ON } from './types';
+
+export function userLoggedOn(user) {
+  return {
+    type: USER_LOGGED_ON,
+    ...user
+  };
+}
 
 export function updateUser(user) {
-  console.log('action', user);
   return {
     type: UPDATE_USER,
     ...user
-  }
-};
+  };
+}

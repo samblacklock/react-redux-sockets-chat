@@ -1,5 +1,6 @@
 export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const MESSAGE_RECIEVED = 'MESSAGE_RECIEVED';
 
+export const USER_LOGGED_ON = 'USER_LOGGED_ON';
 export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_PARTNER = 'UPDATE_PARTNER';

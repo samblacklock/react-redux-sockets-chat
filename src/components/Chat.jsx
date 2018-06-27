@@ -11,6 +11,7 @@ class Chat extends Component {
         <h1>
           Cool Chat App
         </h1>
+        <h2>Hey {this.props.user.nickname}, you are chatting with {this.props.partner.nickname || 'no one! ☹️'}</h2>
         <div className="chat-container">
           <div className="message-container">
             { this.props.messages.map((message, i) => <Message key={i} message={message} />) }

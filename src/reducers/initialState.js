@@ -7,7 +7,5 @@ export default {
     id: null,
     nickname: null
   },
-  messages: [
-    { message: 'new message' }
-  ]
+  messages: []
 };

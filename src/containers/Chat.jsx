@@ -12,7 +12,7 @@ class Chat extends Component {
 
   componentDidMount() {
     const nickname = window.prompt('Please enter a nickname!');
-    this.props.actions.updateUser({ nickname });
+    this.props.actions.userLoggedOn({ nickname });
   }
 
   render() {
