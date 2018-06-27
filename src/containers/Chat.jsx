@@ -6,10 +6,6 @@ import * as userActions from '../actions/userActions';
 import ChatComponent from '../components/Chat';
 
 class Chat extends Component {
-  state = {
-    nickname: this.props.nickname
-  }
-
   handleSendMessage = (message) => {
     this.props.actions.sendMessage(message);
   }
@@ -20,12 +16,15 @@ class Chat extends Component {
   }
 
   render() {
+    const { messages, user, partner } = this.props;
     return (
       <Fragment>
-        { this.state.nickname &&
+        { user.nickname &&
           <ChatComponent 
-            messages={this.props.messages}
+            messages={messages}
             handleSendMessage={this.handleSendMessage}
+            user={user}
+            partner={partner}
           />
         }
       </Fragment>
@@ -35,7 +34,8 @@ class Chat extends Component {
 
 const mapStateToProps = state => ({
   messages: state.messages,
-  nickname: state.user.nickname
+  user: state.user,
+  partner: state.partner
 });
 
 const mapDispatchToProps = dispatch => ({

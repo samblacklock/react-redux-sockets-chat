@@ -1,7 +1,7 @@
 import initialState from './initialState';
 import { UPDATE_USER } from '../actions/types';
 
-export default function usersReducer(state = initialState.user, action = {}) {
+export default function userReducer(state = initialState.user, action = {}) {
   const { type, ...user } = action;
 
   switch (action.type) {

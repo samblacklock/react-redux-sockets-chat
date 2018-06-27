@@ -3,6 +3,10 @@ export default {
     id: null,
     nickname: null
   },
+  partner: {
+    id: null,
+    nickname: null
+  },
   messages: [
     { message: 'new message' }
   ]
