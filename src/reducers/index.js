@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import messages from './messagesReducer';
+import 'babel-polyfill';
 
 const combinedReducers = combineReducers({
   messages

@@ -3,7 +3,7 @@ import { boxShadow } from '../global/styles';
 
 export default ({ message }) => (
   <Fragment>
-    <div className={'message'}>
+    <div className="message">
       {message.message}
     </div>
 
