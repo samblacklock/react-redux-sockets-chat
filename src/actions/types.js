@@ -1,3 +1,4 @@
 export const SEND_MESSAGE = 'SEND_MESSAGE';
 export const MESSAGE_RECIEVED = 'MESSAGE_RECIEVED';
-export const USER_CONNECTED = 'USER_CONNECTED';
+
+export const UPDATE_USER = 'UPDATE_USER';

@@ -1,10 +1,13 @@
 import initialState from './initialState';
-import { USER_CONNECTED } from '../actions/types';
+import { UPDATE_USER } from '../actions/types';
 
 export default function usersReducer(state = initialState.user, action = {}) {
+  const { type, ...user } = action;
+
   switch (action.type) {
-    case (USER_CONNECTED):
-      return ({ ...state, id: action.id });
+    case (UPDATE_USER):
+      console.log(user);
+      return ({ ...state, ...user });
 
     default:
       return state;
