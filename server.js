@@ -13,5 +13,14 @@ app.get('/', (req, res) => {
 });
 
 io.on('connection', (socket) => {
-  console.log('new connection id:', socket.id);
+  const clients = Object.keys(io.sockets.sockets);
+
+  if (clients.length > 2) {
+    // we should only allow 2 users in each chat
+    console.log('Room is full');
+    socket.emit('room_full', { message: 'Chat full!' });
+    socket.disconnect();
+  } else {
+    // do something
+  }
 });
