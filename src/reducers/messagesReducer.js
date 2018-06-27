@@ -1,5 +1,5 @@
 import initialState from './initialState';
-import { MESSAGE_RECIEVED } from '../actions/types';
+import { MESSAGE_RECIEVED, DELETE_LAST_MESSAGE } from '../actions/types';
 
 export default function messagesReducer(state = initialState.messages, action = {}) {
   let newState;
@@ -7,7 +7,11 @@ export default function messagesReducer(state = initialState.messages, action = 
     case (MESSAGE_RECIEVED):
       newState = Object.assign([], state);
       newState.push(action.message);
-      console.log(newState, state);
+      return newState;
+
+    case (DELETE_LAST_MESSAGE):
+      newState = state.slice(0, -1);
+      console.log(newState);
       return newState;
 
     default:

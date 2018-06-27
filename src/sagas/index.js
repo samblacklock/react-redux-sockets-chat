@@ -2,7 +2,7 @@ import io from 'socket.io-client';
 import { call, put, fork, take, select, takeLatest } from 'redux-saga/effects';
 import slashCommand from 'slash-command';
 import { eventChannel } from 'redux-saga';
-import { UPDATE_USER, SEND_MESSAGE, MESSAGE_RECIEVED, USER_LOGGED_ON, UPDATE_PARTNER } from '../actions/types';
+import { UPDATE_USER, SEND_MESSAGE, MESSAGE_RECIEVED, USER_LOGGED_ON, UPDATE_PARTNER, DELETE_LAST_MESSAGE } from '../actions/types';
 
 const getUser = state => state.user;
 
@@ -24,6 +24,7 @@ function subscribe(socket) {
   return eventChannel((emit) => {
     socket.on('message', message => emit({ type: 'message', message }));
     socket.on('new_user', user => emit({ type: 'new_user', ...user }));
+    socket.on('delete_last', () => emit({ type: 'delete_last' }));
     socket.on('room_full', () => {
       alert('Sorry, the room is already full');
     });
@@ -37,11 +38,12 @@ function* readMessage(socket) {
   const channel = yield call(subscribe, socket);
   while (true) {
     const { type, ...data } = yield take(channel);
-
     switch (type) {
       case ('new_user'):
-        console.log('new user', data)
         yield put({ type: UPDATE_PARTNER, ...data });
+        break;
+      case ('delete_last'):
+        yield put({ type: DELETE_LAST_MESSAGE });
         break;
       default:
         yield put({ type: MESSAGE_RECIEVED, ...data });
@@ -58,14 +60,11 @@ function* sendMessage(socket) {
 
     switch (slashcommand) {
       case '/nick':
-        yield put({ type: UPDATE_USER, nickname: body })
+        yield put({ type: UPDATE_USER, nickname: body });
         break;
       case '/think':
         think = true;
         message = body;
-        break;
-      case '/oops':
-        // remove last message
         break;
       default:
         break;

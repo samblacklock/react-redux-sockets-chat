@@ -44,11 +44,9 @@ io.on('connection', (socket) => {
           socket.user.nickname = body;
           socket.broadcast.emit('new_user', { id: socket.id, nickname: body });
           break;
-        case '/think':
-          // set grey text
-          break;
         case '/oops':
-          // remove last message
+          console.log('oops in here')
+          io.emit('delete_last', { from: { ...socket.user } });
           break;
         default:
           io.emit('message', { from: { ...socket.user }, ...data });
