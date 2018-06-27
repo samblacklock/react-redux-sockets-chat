@@ -14,4 +14,3 @@ export default function messagesReducer(state = initialState.messages, action = 
       return state;
   }
 }
-
