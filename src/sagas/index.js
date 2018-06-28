@@ -87,6 +87,17 @@ function* sendMessage(socket) {
         break;
     }
 
+    switch (body) {
+      case '(smile)':
+        message = '🙂';
+        break;
+      case '(wink)':
+        message = '😉';
+        break;
+      default:
+        break;
+    }
+
     socket.emit('message', { message, think, highlight });
   }
 }
