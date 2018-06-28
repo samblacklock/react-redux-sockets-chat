@@ -11,7 +11,6 @@ export default function messagesReducer(state = initialState.messages, action = 
 
     case (DELETE_LAST_MESSAGE):
       newState = state.slice(0, -1);
-      console.log(newState);
       return newState;
 
     default:

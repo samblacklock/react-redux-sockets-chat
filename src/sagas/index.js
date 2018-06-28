@@ -57,6 +57,7 @@ function* sendMessage(socket) {
     const { slashcommand, body } = slashCommand(message);
 
     let think = false;
+    let highlight = false;
 
     switch (slashcommand) {
       case '/nick':
@@ -66,11 +67,15 @@ function* sendMessage(socket) {
         think = true;
         message = body;
         break;
+      case '/highlight':
+        highlight = true;
+        message = body;
+        break;
       default:
         break;
     }
 
-    socket.emit('message', { message, think });
+    socket.emit('message', { message, think, highlight });
   }
 }
 

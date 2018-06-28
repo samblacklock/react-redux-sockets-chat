@@ -45,7 +45,6 @@ io.on('connection', (socket) => {
           socket.broadcast.emit('new_user', { id: socket.id, nickname: body });
           break;
         case '/oops':
-          console.log('oops in here')
           io.emit('delete_last', { from: { ...socket.user } });
           break;
         default:
