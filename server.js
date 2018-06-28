@@ -37,7 +37,6 @@ io.on('connection', (socket) => {
     // listen for new messages
     socket.on('message', (data) => {
       const { slashcommand, body } = slashCommand(data.message);
-      console.log(slashcommand, body);
 
       switch (slashcommand) {
         case '/nick':
@@ -49,6 +48,10 @@ io.on('connection', (socket) => {
           break;
         case '/fadelast':
           io.emit('fade_last');
+          break;
+        case '/countdown':
+          const settings = body.split(' ');
+          socket.broadcast.emit('countdown', { time: settings[0], url: settings[1] });
           break;
         default:
           io.emit('message', { from: { ...socket.user }, ...data });

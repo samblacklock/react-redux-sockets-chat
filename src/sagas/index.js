@@ -9,7 +9,8 @@ import {
   USER_LOGGED_ON,
   UPDATE_PARTNER,
   DELETE_LAST_MESSAGE,
-  FADE_LAST_MESSAGE
+  FADE_LAST_MESSAGE,
+  COUNTDOWN
 } from '../actions/types';
 
 const getUser = state => state.user;
@@ -34,6 +35,7 @@ function subscribe(socket) {
     socket.on('new_user', user => emit({ type: 'new_user', ...user }));
     socket.on('delete_last', () => emit({ type: 'delete_last' }));
     socket.on('fade_last', () => emit({ type: 'fade_last' }));
+    socket.on('countdown', settings => emit({ type: 'countdown', settings }));
     socket.on('room_full', () => {
       alert('Sorry, the room is already full');
     });
@@ -57,6 +59,10 @@ function* readMessage(socket) {
       case ('fade_last'):
         yield put({ type: FADE_LAST_MESSAGE });
         break;
+      case ('countdown'):
+        console.log(data);
+        yield put({ type: COUNTDOWN, ...data });
+        break;
       default:
         yield put({ type: MESSAGE_RECIEVED, ...data });
     }
@@ -67,6 +73,8 @@ function* sendMessage(socket) {
   while (true) {
     let { message } = yield take(SEND_MESSAGE);
     const { slashcommand, body } = slashCommand(message);
+
+    console.log(slashCommand(message))
 
     let think = false;
     let highlight = false;

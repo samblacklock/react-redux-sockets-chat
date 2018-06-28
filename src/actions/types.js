@@ -6,3 +6,5 @@ export const FADE_LAST_MESSAGE = 'FADE_LAST_MESSAGE';
 export const USER_LOGGED_ON = 'USER_LOGGED_ON';
 export const UPDATE_USER = 'UPDATE_USER';
 export const UPDATE_PARTNER = 'UPDATE_PARTNER';
+
+export const COUNTDOWN = 'COUNTDOWN';

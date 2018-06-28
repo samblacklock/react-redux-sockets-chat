@@ -4,7 +4,7 @@ import { UPDATE_USER, USER_LOGGED_ON } from '../actions/types';
 export default function userReducer(state = initialState.user, action = {}) {
   const { type, ...user } = action;
 
-  switch (action.type) {
+  switch (type) {
     case (USER_LOGGED_ON):
       return ({ ...state, ...user });
 

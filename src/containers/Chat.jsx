@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import * as messageActions from '../actions/messageActions';
 import * as userActions from '../actions/userActions';
 import ChatComponent from '../components/Chat';
+import Countdown from '../components/Countdown';
 
-class Chat extends Component {
+class ChatContainer extends Component {
   handleSendMessage = (message) => {
     this.props.actions.sendMessage(message);
   }
@@ -16,7 +17,7 @@ class Chat extends Component {
   }
 
   render() {
-    const { messages, user, partner } = this.props;
+    const { messages, user, partner, countdown } = this.props;
     return (
       <Fragment>
         { user.nickname &&
@@ -27,6 +28,10 @@ class Chat extends Component {
             partner={partner}
           />
         }
+
+        { countdown && 
+          <Countdown settings={countdown.settings} />
+        }
       </Fragment>
     );
   }
@@ -35,7 +40,8 @@ class Chat extends Component {
 const mapStateToProps = state => ({
   messages: state.messages,
   user: state.user,
-  partner: state.partner
+  partner: state.partner,
+  countdown: state.countdown
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -45,4 +51,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Chat);
+)(ChatContainer);

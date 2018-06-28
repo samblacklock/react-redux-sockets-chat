@@ -7,5 +7,6 @@ export default {
     id: null,
     nickname: null
   },
-  messages: []
+  messages: [],
+  countdown: null
 };
