@@ -2,7 +2,15 @@ import io from 'socket.io-client';
 import { call, put, fork, take, select, takeLatest } from 'redux-saga/effects';
 import slashCommand from 'slash-command';
 import { eventChannel } from 'redux-saga';
-import { UPDATE_USER, SEND_MESSAGE, MESSAGE_RECIEVED, USER_LOGGED_ON, UPDATE_PARTNER, DELETE_LAST_MESSAGE } from '../actions/types';
+import { 
+  UPDATE_USER,
+  SEND_MESSAGE,
+  MESSAGE_RECIEVED,
+  USER_LOGGED_ON,
+  UPDATE_PARTNER,
+  DELETE_LAST_MESSAGE,
+  FADE_LAST_MESSAGE
+} from '../actions/types';
 
 const getUser = state => state.user;
 
@@ -25,6 +33,7 @@ function subscribe(socket) {
     socket.on('message', message => emit({ type: 'message', message }));
     socket.on('new_user', user => emit({ type: 'new_user', ...user }));
     socket.on('delete_last', () => emit({ type: 'delete_last' }));
+    socket.on('fade_last', () => emit({ type: 'fade_last' }));
     socket.on('room_full', () => {
       alert('Sorry, the room is already full');
     });
@@ -44,6 +53,9 @@ function* readMessage(socket) {
         break;
       case ('delete_last'):
         yield put({ type: DELETE_LAST_MESSAGE });
+        break;
+      case ('fade_last'):
+        yield put({ type: FADE_LAST_MESSAGE });
         break;
       default:
         yield put({ type: MESSAGE_RECIEVED, ...data });

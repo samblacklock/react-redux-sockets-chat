@@ -7,6 +7,7 @@ export default ({ message, userId }) => (
       ${message.from.id === userId ? 'user' : 'partner'}
       ${message.think && ' think'}
       ${message.highlight && ' highlight'}
+      ${message.fade && ' fade'}
     `}>
       {message.message}
     </div>
@@ -31,7 +32,9 @@ export default ({ message, userId }) => (
           box-shadow: ${boxShadow}
           margin: 0.5rem
           max-width: 50%
+          opacity: 1
           padding: 1rem
+          transition: opacity 1s ease
         }
 
         .think {
@@ -41,6 +44,10 @@ export default ({ message, userId }) => (
         .highlight {
           font-size: calc(1rem + 10%)
           background: linear-gradient(to top, rgba(0,0,0,0.28) 0%, transparent 100%)
+        }
+
+        .fade {
+          opacity: 0.1
         }
 
         .user {

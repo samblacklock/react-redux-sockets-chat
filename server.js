@@ -45,7 +45,10 @@ io.on('connection', (socket) => {
           socket.broadcast.emit('new_user', { id: socket.id, nickname: body });
           break;
         case '/oops':
-          io.emit('delete_last', { from: { ...socket.user } });
+          io.emit('delete_last');
+          break;
+        case '/fadelast':
+          io.emit('fade_last');
           break;
         default:
           io.emit('message', { from: { ...socket.user }, ...data });
