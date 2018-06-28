@@ -10,6 +10,6 @@ and
 yarn start
 ```
 
-navigate to localhost:3000, open in two browser windows to chat
+Navigate to `localhost:3000`, open in two browser windows to chat
 
-Time spent 5-6 hours over a few sessions
+Time spent: 5-6 hours over a few sessions
